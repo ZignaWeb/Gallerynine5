@@ -1,0 +1,158 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Cron&oacute;metro</title>
+<script type="text/javascript">
+<!--
+var tiempoInicial='';
+var tiempoActual='';
+var auxTime=new Date();
+var aumen;
+var crono;
+function ruta(id){ return document.getElementById(id); } 
+window.onload=function(){
+onClicks();
+ruta('rc').style.display='none';
+ruta('aumc').onmousedown=function(){aumentar();};
+ ruta('aumc').onmouseup=function(){clearInterval(aumen);}
+  ruta('disc').onmouseup=function(){clearInterval(aumen);}
+ruta('disc').onmousedown=function(){minimizar();};
+}
+function minimizar(){
+	var tam=getStyle(ruta('cronometro'),'fontSize');
+	tam=parseInt(tam,10);
+	tam-=2;
+	if(tam>40){
+		ruta('cronometro').style.fontSize=tam+"px";
+		aumen=setTimeout("minimizar()", 25);
+	}
+}
+function aumentar(){
+	var tam=getStyle(ruta('cronometro'),'fontSize');
+	tam=parseInt(tam,10);
+	tam+=2;
+	if(tam<200){
+		ruta('cronometro').style.fontSize=tam+"px";
+		aumen=setTimeout("aumentar()", 25);
+	}
+}
+
+function onClicks(){
+
+	ruta('bc').onclick=function(){
+		if(this.getAttribute('est')=="limpio"){
+			this.setAttribute('est','prendido');
+			this.innerHTML="Pausar cron&oacute;metro";
+			tiempoInicial = new Date();	
+			auxTime.setTime(0);
+			crono=setTimeout("cronometro()", 1000);
+		} else if(this.getAttribute('est')=="parado"){
+			this.setAttribute('est','prendido');
+			ruta('rc').style.display='none';
+			this.innerHTML="Pausar cron&oacute;metro";
+			var reTime= new Date();
+			var diferencia = (reTime.getTime() - tiempoActual.getTime()+auxTime.getTime());
+			auxTime.setTime(diferencia);
+			crono=setTimeout("cronometro()", 1000);
+		} else if(this.getAttribute('est')=="prendido"){
+			this.setAttribute('est','parado');
+			this.innerHTML="Continuar cron&oacute;metro";
+			ruta('rc').style.display='block';
+			clearInterval(crono);
+		}
+	}
+	ruta('rc').onclick=function(){
+		clearInterval(crono);
+		ruta('cronometro').innerHTML="00:00:00";
+		ruta('bc').setAttribute('est','limpio');
+		this.style.display='none';
+	}
+}
+
+function cronometro(){
+	tiempoActual = new Date();
+	var midifTime= new Date();
+	var diferencia = (tiempoActual.getTime() - tiempoInicial.getTime() - auxTime.getTime());
+	
+	midifTime.setTime(diferencia);
+	var horas = (midifTime.getUTCHours());
+	if(horas<10){
+		horas="0"+horas;	
+	}
+	var segundos = midifTime.getUTCSeconds();
+	if(segundos<10){
+		segundos="0"+segundos;	
+	}
+    var minutos = midifTime.getUTCMinutes();
+	if(minutos<10){
+		minutos="0"+minutos;	
+	}
+	ruta('cronometro').innerHTML=horas+":"+minutos+":"+segundos;
+	crono=setTimeout("cronometro()", 1000);
+}
+
+function getStyle(el, cssprop){
+ if (el.currentStyle) //IE
+  return el.currentStyle[cssprop]
+ else if (document.defaultView && document.defaultView.getComputedStyle) //Firefox
+  return document.defaultView.getComputedStyle(el, "")[cssprop]
+ else //try and get inline style
+  return el.style[cssprop]
+}
+//-->
+</script>
+
+<style type="text/css">
+<!--
+h1, h2 {margin:0px;}
+#cronometro{margin-top:20px;margin-bottom:30px;font-size:100px;}
+#amigas{margin-top:20px;margin-bottom:30px;}
+#menu{margin-top:50px;}
+a{margin:5px;}
+-->
+</style>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-645869-68']);
+  _gaq.push(['_setDomainName', 'cronometro.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+<body>
+<div align="center">
+<div id="mihead"><h1>Cron&oacute;metro</h1>
+  <h3>Online y gratis en cronometro.net</h3></div>
+  <div>
+  <script type="text/javascript"><!--
+google_ad_client = "ca-pub-5486704611799496";
+/* cronometroNetRec */
+google_ad_slot = "6227712739";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div id="menu"><a href="javascript:void(0);" id="aumc">Aumentar cron&oacute;metro</a> | <a href="javascript:void(0);" id="disc">Disminuir cron&oacute;metro</a></div>
+<div id="cronometro">00:00:00</div>
+<a href="javascript:void(0);" id="bc" est="limpio">Iniciar cron&oacute;metro</a>
+<a href="javascript:void(0);" id="rc">Resetear cron&oacute;metro</a>
+<div id="amigas">
+P&aacute;ginas recomendadas
+<p> <a href="http://timer.es/" title="Timer" target="_blank">Timer</a></p>
+</div>
+</div>
+</body>
+</html>
