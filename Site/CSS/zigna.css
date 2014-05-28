@@ -105,5 +105,7 @@ body#exibitions .exibit + hr { margin-top:10px; display:block; clear:both}
 
 .orbit-timer { display:none !important;}
 #private #container > div > div > div.small-12.medium-6.medium-offset-3 { margin-top:25%}
-body#exibitions .exibit p:not(:first-child){ line-height:100% !important}
+body#exibitions .exibit p:not(:first-child){ line-height: 1.6;
+margin-bottom: 1.25rem;}
 body#perfil h4,body#perfil h3{ margin:0}
+footer > div > div > span a {margin-bottom: 5px;}
