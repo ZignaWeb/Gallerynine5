@@ -58,7 +58,7 @@ body#news .exibit:nth-of-type(4) div:first-child p:first-child{ color:#f00 !impo
 			<div class="'.$htmlclase.'">
             <h2>'.$nd["titulo"].'</h2>
             <h3>'.fFecha($nd["creada"]).'</h3>
-            <p>'.substr($nd["descripcion"],0,500).'</p>
+            <p>'.$nd["descripcion"].'</p>
 			<a href="newsi.php?i='.$nd["id"].'" class="more">Read more</a>
             </div>
             '.$htmlimg.'
